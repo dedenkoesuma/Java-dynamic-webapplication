@@ -2,7 +2,7 @@
 <%@ page import="java.util.*, org.example.dynamicweb.LoginServlet" %>
 <html>
 <head>
-    <title>Halaman Selamat Datang</title>
+    <title>Welcome Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
