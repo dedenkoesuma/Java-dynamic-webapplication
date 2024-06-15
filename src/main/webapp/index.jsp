@@ -23,7 +23,7 @@
         }
         .login-container input[type="text"],
         .login-container input[type="password"] {
-            width: 100%;
+            width: 90%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -58,7 +58,7 @@
         }
     %>
     <form action="login" method="post">
-        <label for="userId">Username:</label>
+        <label for="userId">User ID:</label>
         <input type="text" id="userId" name="userId" required>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>

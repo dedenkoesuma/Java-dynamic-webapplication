@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +17,10 @@ public class LoginServlet extends HttpServlet {
     private static final String PASSWORD = "admin";
 
     public static class Student {
-        public String studentID;
-        public String studentName;
-        public String department;
-        public int mark;
+        private String studentID;
+        private String studentName;
+        private String department;
+        private int mark;
 
         public Student(String studentID, String studentName, String department, int mark) {
             this.studentID = studentID;
@@ -47,7 +46,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    public static List<Student> students = new ArrayList<>();
+    private static List<Student> students = new ArrayList<>();
 
     static {
         students.add(new Student("S1", "Student 1", "Dep 1", 35));
@@ -61,26 +60,17 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userId = request.getParameter("userId");
-        String password = request.getParameter("password");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userId = req.getParameter("userId");
+        String password = req.getParameter("password");
 
         if (USER_ID.equals(userId) && PASSWORD.equals(password)) {
-            HttpSession session = request.getSession();
+            HttpSession session = req.getSession();
             session.setAttribute("userId", userId);
             session.setAttribute("students", students);
-            response.sendRedirect("welcome.jsp");
+            resp.sendRedirect("welcome.jsp");
         } else {
-            response.sendRedirect("index.jsp?error=true");
+            resp.sendRedirect("index.jsp?error=true");
         }
-    }
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
-
-        // Hello
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + "message" + "</h1>");
-        out.println("</body></html>");
     }
 }
